@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="Labor6.css">
+  <title>SLIDESHOW</title>
+</head>
+
+<body>
+  <header>
+    <h1>PHOTO SLIDER</h1>
+  </header>
+
+  <main>
+    <div class="slideBox">
+      <div class="imgBox">
+        <img src="img1.jpg" alt="img1" width="100%" height="100%">
+      </div>
+      <div class="imgBox">
+        <img src="img2.jpg" alt="img2" width="100%" height="100%">
+      </div>
+      <div class="imgBox">
+        <img src="img3.jpg" alt="img3" width="100%" height="100%">
+      </div>
+      <div class="imgBox">
+        <img src="img4.jpg" alt="img4" width="100%" height="100%">
+      </div>
+      <div class="imgBox">
+        <img src="img5.jpg" alt="img5" width="100%" height="100%">
+      </div>
+      <div class="imgBox">
+        <img src="img6.jpg" alt="img6" width="100%" height="100%">
+      </div>
+      <div class="imgBox">
+        <img src="img7.jpg" alt="img7" width="100%" height="100%">
+      </div>
+      <div class="imgBox">
+        <img src="img8.jpg" alt="img8" width="100%" height="100%">
+      </div>
+      <div class="imgBox">
+        <img src="img9.jpg" alt="img9" width="100%" height="100%">
+      </div>
+    </div>
+
+    <div class="controlls">
+      <p>Controlls for image display:</p>
+      <label>Select option</label>
+      <button type="button" id="btn" onclick="play()">PAUSE</button>
+      <br/>
+      <label>Repeat slideshow</label>
+      <input id="check" type="checkbox">
+      <br/>
+      <label for="timer">Change image every
+        <select name="timer" id="timer">
+          <option value="1000">1</option>
+          <option value="3000" selected>3</option>
+          <option value="5000">5</option>
+          <option value="7000">7</option>
+          <option value="10000">10</option>
+        </select>
+        seconds
+    </label>
+    </div>
+  </main>
+
+  <script type="text/javascript">
+  var slideIndex = 0;
+  var checked;
+  var change=0;
+  var t;
+  var timing = document.getElementById("timer").value;
+  changeImg();
+
+  function play(){
+      if(change==0){
+        clearTimeout(t);
+        change++;
+        document.querySelector('#btn').innerText = 'PLAY';
+      }
+      else{
+        changeImg();
+        change=0;
+        document.querySelector('#btn').innerText = 'PAUSE';
+      }
+  }
+
+  function changeImg(){
+    var i;
+    var slides = document.getElementsByClassName("imgBox");
+
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+    slideIndex++;
+
+    checked = document.getElementById("check").checked;
+    if (checked && slideIndex > slides.length){
+      alert("You are at the END of the slideshow! Press OK, if you want to start from beginning.");
+    }
+
+    if (slideIndex > slides.length) {slideIndex = 1}
+    slides[slideIndex-1].style.display = "block";
+
+    timing = document.getElementById("timer").value;
+    t = setTimeout(changeImg, timing);
+  }
+  </script>
+
+</body>
+</html>
